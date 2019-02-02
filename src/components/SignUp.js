@@ -39,7 +39,7 @@ class SignUp extends Component {
 
     render() {
         const { classes, auth, authError } = this.props;
-        if(auth.uid) return <Redirect to={'/'} />;
+        if(auth.uid) return <Redirect to="/" />;
         return (
             <main className={classes.main}>
                 <CssBaseline/>
@@ -86,7 +86,7 @@ class SignUp extends Component {
                         </Button>
                     </form>
                     {authError? <p className="auth-error">authError</p>: null}
-                    <p>Already has an account ? <Link to={'/signin'}>Sign in now!</Link></p>
+                    <p>Already has an account ? <Link to="/signin">Sign in now!</Link></p>
                 </Paper>
             </main>
         );

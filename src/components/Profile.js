@@ -42,7 +42,7 @@ class Profile extends Component {
     render() {
         const {classes, auth, profile} = this.props;
         //console.log(auth);
-        if(!auth.uid) return <Redirect to={'/signin'} />;
+        if(!auth.uid) return <Redirect to="/signin" />;
         return profile && profile.FirstName ? (
             <Card className={classes.card}>
                 <CardContent>
