@@ -13,13 +13,9 @@ code {
     monospace;
 }
 
-.MuiFormLabel-root-96.MuiFormLabel-focused-97 {
+.my-class-name {
   color: #f50057 !important;
 }
-.MuiInput-underline-107::after {
-  border-bottom: 2px solid #f50057 !important;
-}
-
 a {
   color: #f50057 !important;
   text-decoration: none;
@@ -28,4 +24,10 @@ a {
 a:hover {
   color: #000 !important;
   text-decoration: underline;
+}
+
+.auth-error {
+  font-size: 15px;
+  color: #f50057;
+  text-align: center;
 }

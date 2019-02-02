@@ -1,4 +1,7 @@
 const stylesAuth = theme => ({
+    root: {
+        backgroundColor: '#f50057 !important'
+    },
     main: {
         width: 'auto',
         display: 'block',

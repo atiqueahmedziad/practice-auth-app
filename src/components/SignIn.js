@@ -12,8 +12,14 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import styleAuth from './styles/stylesAuth';
+import {signIn} from '../store/actions/authAction';
+import {compose} from 'redux';
+import {connect} from "react-redux";
+import FormStyle from './styles/FormStyle';
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+
 
 class SignIn extends Component {
     state = {
@@ -27,11 +33,12 @@ class SignIn extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        console.log(this.state.email, this.state.password)
+        this.props.signIn(this.state);
     };
 
     render() {
-        const { classes } = this.props;
+        const { classes,auth, authError } = this.props;
+        if(auth.uid) return <Redirect to={'/'} />;
         return (
             <main className={classes.main}>
                 <CssBaseline/>
@@ -43,6 +50,7 @@ class SignIn extends Component {
                         Sign in
                     </Typography>
                     <form className={classes.form} onSubmit={this.handleSubmit}>
+                        <MuiThemeProvider theme={FormStyle}>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="email">Email Address</InputLabel>
                             <Input id="email" onChange={this.handleChange} name="email" autoComplete="email" autoFocus/>
@@ -51,6 +59,7 @@ class SignIn extends Component {
                             <InputLabel htmlFor="password">Password</InputLabel>
                             <Input name="password" onChange={this.handleChange} type="password" id="password" autoComplete="current-password"/>
                         </FormControl>
+                        </MuiThemeProvider>
                         <FormControlLabel
                             style={{float: 'left', clear: 'right'}}
                             control={<Checkbox value="remember" color="primary"/>}
@@ -66,6 +75,7 @@ class SignIn extends Component {
                             Sign in
                         </Button>
                     </form>
+                    {authError? <p className="auth-error">{authError}</p>: null}
                     <p>Don't have an account ? <Link to={'/signup'}>Sign up here!</Link></p>
                 </Paper>
             </main>
@@ -77,4 +87,20 @@ SignIn.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styleAuth)(SignIn);
+const mapStateToProps = state => {
+    return {
+        authError: state.auth.authError,
+        auth: state.firebase.auth
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        signIn: creds => { dispatch(signIn(creds))}
+    }
+};
+
+export default compose(
+    withStyles(styleAuth),
+    connect(mapStateToProps,mapDispatchToProps)
+)(SignIn)
