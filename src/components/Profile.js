@@ -19,7 +19,7 @@ const styles = {
     card: {
         minWidth: 275,
         maxWidth: 400,
-        margin: '40px Auto 0',
+        margin: '40px auto 0',
 
     },
     title: {
@@ -37,7 +37,7 @@ const styles = {
 class Profile extends Component {
     render() {
         const {classes} = this.props;
-        const bull = <span className={classes.bullet}>•</span>;
+
         return (
             <Card className={classes.card}>
                 <CardContent>
