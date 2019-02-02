@@ -10,12 +10,12 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-          <Switch>
-            <Route exact path='/' component={Profile} />
-            <Route exact path='/signin' component={SignIn} />
-            <Route exact path='/signup' component={SignUp} />
-            <Route path="*" component={Error} />
-          </Switch>
+        <Switch>
+          <Route exact path='/' component={Profile} />
+          <Route exact path='/signin' component={SignIn} />
+          <Route exact path='/signup' component={SignUp} />
+          <Route path="*" component={Error} />
+        </Switch>
       </BrowserRouter>
     );
   }
